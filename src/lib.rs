@@ -1,10 +1,16 @@
-use tracing::{info, Level};
+use tracing::Level;
 use tracing_appender::non_blocking::{NonBlocking, WorkerGuard};
 use tracing_appender::rolling::Rotation;
 use tracing_subscriber::fmt::writer::{MakeWriterExt, WithMaxLevel};
 use tracing_subscriber::fmt::{Layer, Subscriber};
 use tracing_subscriber::layer::SubscriberExt;
-use twba_backup_config::Conf;
+pub mod prelude {
+    pub use crate::{get_config, init_tracing};
+    pub use tracing::{debug, error, info, instrument, trace, warn};
+    pub use twba_backup_config::{self, Conf};
+    pub use twba_local_db;
+}
+use prelude::*;
 
 pub fn get_config() -> Conf {
     twba_backup_config::get_default_builder()
@@ -13,9 +19,9 @@ pub fn get_config() -> Conf {
 }
 
 pub fn init_tracing(crate_name: &str) -> Vec<WorkerGuard> {
-    let (guard1, warn_file) = file_tracer(crate_name, Level::WARN, Rotation::HOURLY);
-    let (guard2, info_file) = file_tracer(crate_name, Level::INFO, Rotation::HOURLY);
-    let (guard3, trace_file) = file_tracer(crate_name, Level::TRACE, Rotation::HOURLY);
+    let (guard1, warn_file) = file_tracer(crate_name, Level::WARN, Rotation::DAILY);
+    let (guard2, info_file) = file_tracer(crate_name, Level::INFO, Rotation::DAILY);
+    let (guard3, trace_file) = file_tracer(crate_name, Level::TRACE, Rotation::DAILY);
 
     let file_subscriber = Subscriber::builder()
         .with_env_filter(format!("warn,{}=trace", crate_name))

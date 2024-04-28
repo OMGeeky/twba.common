@@ -1,5 +1,4 @@
-use tracing::*;
-use twba_common::init_tracing;
+use twba_common::prelude::*;
 
 pub fn main() {
     let _guard = init_tracing("twba_common");
