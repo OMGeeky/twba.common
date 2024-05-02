@@ -60,6 +60,6 @@ pub mod notify {
 
     #[derive(Clone, Debug, Deserialize, Serialize)]
     pub struct NotificationRequest {
-        message: String,
+        pub message: String,
     }
 }
