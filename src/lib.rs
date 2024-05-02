@@ -54,3 +54,12 @@ pub fn file_tracer(
     let file = file.with_max_level(level);
     (guard, file)
 }
+
+pub mod notify {
+    use serde::{Deserialize, Serialize};
+
+    #[derive(Clone, Debug, Deserialize, Serialize)]
+    pub struct NotificationRequest {
+        message: String,
+    }
+}

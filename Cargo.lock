@@ -2583,8 +2583,9 @@ dependencies = [
 
 [[package]]
 name = "twba-common"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
+ "serde",
  "tracing",
  "tracing-appender",
  "tracing-subscriber",
