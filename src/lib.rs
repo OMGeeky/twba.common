@@ -19,9 +19,10 @@ pub fn get_config() -> Conf {
 }
 
 pub fn init_tracing(crate_name: &str) -> Vec<WorkerGuard> {
-    let (guard1, warn_file) = file_tracer(crate_name, Level::WARN, Rotation::DAILY);
-    let (guard2, info_file) = file_tracer(crate_name, Level::INFO, Rotation::DAILY);
-    let (guard3, trace_file) = file_tracer(crate_name, Level::TRACE, Rotation::DAILY);
+    let crate_name = crate_name.replace('-', "_");
+    let (guard1, warn_file) = file_tracer(&crate_name, Level::WARN, Rotation::DAILY);
+    let (guard2, info_file) = file_tracer(&crate_name, Level::INFO, Rotation::DAILY);
+    let (guard3, trace_file) = file_tracer(&crate_name, Level::TRACE, Rotation::DAILY);
 
     let file_subscriber = Subscriber::builder()
         .with_env_filter(format!("warn,{}=trace", crate_name))
