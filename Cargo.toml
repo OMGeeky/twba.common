@@ -1,6 +1,6 @@
 [package]
 name = "twba-common"
-version = "0.2.6"
+version = "0.3.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
@@ -12,5 +12,5 @@ tracing-appender = "0.2"
 
 
 twba-backup-config = { version = "0.1", git = "https://github.com/OMGeeky/backup_config.git" }
-twba-local-db = { version = "0.3", git = "https://github.com/OMGeeky/twitch_backup.local_db.git" }
+twba-local-db = { version = "0.4", git = "https://github.com/OMGeeky/twitch_backup.local_db.git" }
 serde = { version = "1.0.199", features = ["derive"] }
